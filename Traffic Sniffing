@@ -1,0 +1,18 @@
+Filtering packets:
+tcp.flags.syn    [for filtering syn packet]
+http    [for filtering http]
+Follow up streams:
+right click a packet --> follow --> tcp/http stream
+
+follow other stream by clicking stream at the right corner
+Finding files:
+file-->export object-->http to filter text file
+Finding file comments:
+
+Filtering string:
+ctrl+f
+select string
+and search on search bar
+
+Dos/DDos attack:
+statistics-->conversations-->ipv4
