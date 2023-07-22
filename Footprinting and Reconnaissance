@@ -1,0 +1,10 @@
+LIVE HOSTS DISCOVERY
+nmap 54.38.165.*    [finding live hosts]
+nmap 54.38.165.1/24    [finding live hosts]
+nmap 54.38.165.0-255    [finding live hosts]
+nmap  -sP 54.38.165.*   [finding live hosts at large network]
+nmap -PR -sn 54.38.165.0/24    [-PR=when you dont have root access -sn=do not scan for open ports]
+
+OPEN PORTS DISCOVERY
+nmap -sC -sV -p- -T4 -v 54.38.165.*    [ports and services running]
+nmap -sC -sV -p- -O -v -A -T4 54.38.165.* 
